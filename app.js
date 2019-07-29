@@ -1,13 +1,28 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyparser =require('body-parser')
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var layout = require('express-ejs-layouts')
-var app = express();
+// Route
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const layout = require('express-ejs-layouts')
+const app = express();
+
+// Db Setup
+const mongoose = require('mongoose')
+
+mongoose.connect('mongodb://localhost:dzaka20@ds141815.mlab.com:41815/blogadmin',{
+    useNewUrlParser:true
+}).then(()=>{
+  console.log('yes bisa')
+}).catch(err=>{
+  console.log(err)
+})
+
+app.use(bodyparser.urlencoded({extended:false}))
 
 // view engine setup
 app.use(layout)
@@ -36,7 +51,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('404');
 });
 
 module.exports = app;
