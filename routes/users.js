@@ -17,7 +17,7 @@ router.post('/login', (req,res)=>{
   userData.findOne({'username':req.body.username,'password':req.body.password}).then(()=>{
     res.redirect('/admin')
   }).catch(err=>{
-    res.send(err)
+    res.redirect('/users')
   })
 })
 module.exports = router;
