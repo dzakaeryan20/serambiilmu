@@ -1,0 +1,43 @@
+<div class="container-fluid" style="margin-top: 70px">
+    <div class="row mt50">
+      <div class="col-xs-12">
+            <h2 align="center">Edit Post</h2>
+        </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-xs-8 col-xs-offset-2">
+            <div class="tab-ticket-status" style="background-color: white; padding: 10px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3); border: 1px;">
+                
+                <form action="/admin/saveupdate?_method=PUT" method="POST"  enctype="multipart/form-data" >
+                    <input type="hidden" name="id" value="<%= data.id %>">
+                    <input type="hidden" name="filelast" value="<%= data.file %>">
+                    <div class="form-group">
+                        <label for="">Judul</label>
+                        <input type="text" class="form-control" id="hotel_name" placeholder="<%= data.judul %>" name="judul" value="<%= data.judul %>"  >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Description</label>
+                        <input type="text" class="form-control" id="hotel_code" placeholder="<%= data.deskripsi%>" name="deskripsi" value="<%= data.deskripsi %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Upload Data</label>
+                        <input type="file" required class="form-control" id="country" placeholder="<%= data.file%>" name="file" value="<%= data.file %>" >
+                    </div>
+                    <div class="form-group">
+                        <label for="">Artikel</label>
+                        <!-- <input type="text" class="form-control" id="city" placeholder="City" name="city" > -->
+                        <textarea class="form-control form-description" style="height: 320px" name="artikel" id="city" placeholder="<%= data.artikel %>" value="<%= data.artikel %>"><%= data.artikel %></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <a href="/admin" class="btn btn-danger">Back</a>
+                    </div>
+                     
+                </form>
+  
+            </div>
+        </div>
+    </div>
+  </div>

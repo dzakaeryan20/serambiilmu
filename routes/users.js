@@ -15,7 +15,7 @@ router.get('/dashboard', async (req,res)=>{
 
 router.post('/login', (req,res)=>{
   userData.findOne({'username':req.body.username,'password':req.body.password}).then(()=>{
-    res.redirect('/users/dashboard')
+    res.redirect('/admin')
   }).catch(err=>{
     res.send(err)
   })
