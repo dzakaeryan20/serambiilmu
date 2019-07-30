@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyparser =require('body-parser')
 const method = require('method-override')
+const session = require('express-session')
 // Route
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -34,8 +35,18 @@ app.use(method('_method'))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cookieParser());
+app.use(session({
+  secret:"Dz20091996",
+  key:"user_sid",
+  resave:false,
+  saveUninitialized:false,
+  cookie:{
+    expires:600000
+  }
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

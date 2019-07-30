@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var BlogData= require('../models/blog')
 const fs = require('fs')
+const SessionCheck = require('../middleware/index').SessionCheck
 const multer = require('multer')
 const path = require('path')
 const Storages=multer.diskStorage({
@@ -17,7 +18,7 @@ const upload =multer({
     storage:Storages
 }).single('file');
 /* GET home page. */
-router.get('/', (req, res) =>{
+router.get('/',SessionCheck, (req, res) =>{
     BlogData.find().then((data)=>{
         res.render('admin/dashboard', { data:data });
         //res.send(list)
@@ -48,7 +49,12 @@ router.get('/delete/:id',async (req,res)=>{
     })
 })
 router.get('/logout',(req,res)=>{
-    res.redirect('/users')
+    if(req.session.user && req.cookies.user_sid){
+        res.clearCookie('user_sid')
+        //req.session.destroy()
+        res.redirect('/users')
+    }
+    
 })
 
 //download file
@@ -83,18 +89,21 @@ router.post('/save',(req,res)=>{
 })
 
 router.put('/saveupdate',(req,res)=>{
+    var d = new Date()
+    d.toString().slice(0,15)
     upload(req,res,(err)=>{
         if(err){
             res.send(err)
         }
         else{
         let lastfile='./public/file/'+req.body.filelast
+            //const item = Date.now().toString().slice(0)
            const data ={
                judul:req.body.judul,
                file:req.file.filename,
                artikel:req.body.artikel,
                deskripsi:req.body.deskripsi,
-               date:Date.now()
+               date:d
            }
            
            BlogData.update({_id:req.body.id},data).then(()=>{

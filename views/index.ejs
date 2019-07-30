@@ -1,3 +1,12 @@
+<style>
+    .slide{
+        -webkit-overflow-scrolling: touch;
+    }
+    .slider{
+        display: flex;
+    }
+</style>
+
 <section class="home-banner">
     <div class="container">
         <div class="row">
@@ -14,7 +23,7 @@
 </section>
 
 
-<section class="home-our-company">
+<section class="home-our-company ">
 
         <!-- old -->
             
@@ -35,11 +44,51 @@
                 <div class="hoc-r-content2"></div>
             </div>
         </div>
-    
+        
+        <!-- <div class="hoc-wrp2 slide">
+            <div class="hoc-l2">
+                <div class="hoc-r-content2">
+                    <h3>Petunjuk Pelaksanaan dan Materi MPLS 2019 - 2020</h3>
+                    <p>
+                            Petunjuk Pelaksanaan dan Materi MPLS 2019 - 2020 SD , SMP , SMA dan SMK  - Memasuki Tahun Pelajaran 2019 - 2020 , Sebagaimana Diketahui 3 ( Tiga ) Hari Pada Permulaan Masuk Sekolah Diwajibkan Untuk Melaksanakan Masa Pengenalan Lingkungan Sekolah ( MPLS )..
+                    </p>
+                    <a href="http://www.datadikdasmen.com/2019/06/juklak-dan-materi-mpls-2019-2020-sd-smp.html">READ MORE</a>
+                </div>
+            </div>
+            <div class="hoc-r2">
+                <div class="hoc-r-content2"></div>
+            </div>
+        </div>
 
+     -->
     
     
+</section>
     
+<section class="media-room-news" >
+        <div class="container-fluid" >
+            <% for(var i=0;i<data.length;i++){ %>
+            <div class="col-xs-3" style="margin-top: 50px;">
+                <div class="news-event aos-init aos-animate" data-aos="fade-up">
+                    <% if(i%2==0){ %>
+                        <img src="https://www.mgholidaygroup.com/themes/v3/images/bg-mr-blue.jpg" alt="" class="img-responsive">
+                    <% } %>
+                    <% if(i%2!=0){ %>
+                        <img src="https://www.mgholidaygroup.com/themes/v3/images/bg-mr-brown.jpg" alt="" class="img-responsive">
+                    <% } %>
+
+                        <div class="overlay">
+                            <a href="artikel/<%= data[i]._id%>" class="text">
+                                <%= data[i].date %>
+                                <span>
+                                    <%= data[i].judul%>
+                                </span>
+                            </a>
+                            
+                    </div>            
+                </div>
+            </div>
+            <%}%>
+            
+        </div>
     </section>
-    
-    
